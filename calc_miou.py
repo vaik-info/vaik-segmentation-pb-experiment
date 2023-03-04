@@ -3,7 +3,6 @@ import os
 import glob
 import json
 import numpy as np
-from sklearn import metrics
 
 
 def intersect_and_union(pred_label, label, num_classes, ignore_index):
@@ -44,8 +43,8 @@ def calc_mIoU(json_dict_list, classes, ignore_label):
     pred_list = []
     gt_list = []
     for json_dict in json_dict_list:
-        pred_list.append(json_dict['labels'])
-        gt_list.append(json_dict['answer'])
+        pred_list.append(json_dict['labels']['array'])
+        gt_list.append(json_dict['answer']['array'])
     miou, acc, iou = mean_iou(np.vstack(pred_list), np.vstack(gt_list), len(classes), classes.index(ignore_label))
 
     print(f'mIoU:{miou:.4f}')
@@ -69,7 +68,7 @@ def main(input_json_dir_path, input_classes_path, ignore_label):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='inference')
-    parser.add_argument('--input_json_dir_path', type=str, default='~/.vaik-mnist-segmentation-dataset/test_images_out')
+    parser.add_argument('--input_json_dir_path', type=str, default='~/.vaik-segmentation-pb-experiment/test_images_out')
     parser.add_argument('--input_classes_path', type=str,
                         default=os.path.join(os.path.dirname(__file__), 'test_images/classes.txt'))
     parser.add_argument('--ignore_label', type=str, default='background')
