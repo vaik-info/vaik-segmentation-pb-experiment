@@ -45,10 +45,10 @@ def main(input_json_dir_path, input_classes_path, output_dir_path):
             json_dict_list.append(json_dict)
     for json_path, json_dict in zip(json_path_list, json_dict_list):
         gt_image = get_image(json_dict['answer'], colors)
-        output_gt_image_path = os.path.join(output_dir_path, f'{os.path.basename(json_path)}_gt.png')
+        output_gt_image_path = os.path.join(output_dir_path, f'draw_{os.path.basename(json_path)}_gt.png')
         gt_image.save(output_gt_image_path, quality=100, subsampling=0)
         pred_image = get_image(json_dict['labels'], colors)
-        output_pred_image_path = os.path.join(output_dir_path, f'{os.path.basename(json_path)}_pred.png')
+        output_pred_image_path = os.path.join(output_dir_path, f'draw_{os.path.basename(json_path)}_pred.png')
         pred_image.save(output_pred_image_path, quality=100, subsampling=0)
 
 

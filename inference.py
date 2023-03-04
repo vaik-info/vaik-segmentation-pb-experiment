@@ -46,7 +46,7 @@ def main(input_saved_model_dir_path, input_classes_path, input_image_dir_path, a
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='inference')
     parser.add_argument('--input_saved_model_dir_path', type=str,
-                        default='~/output_model/2023-03-04-19-07-35/step-5000_batch-8_epoch-3_loss_0.0017_one_hot_mean_io_u_0.8605_val_loss_0.1085_val_one_hot_mean_io_u_0.1840')
+                        default='~/output_model/2023-03-04-19-07-35/step-5000_batch-8_epoch-10_loss_0.0010_one_hot_mean_io_u_0.8857_val_loss_0.0016_val_one_hot_mean_io_u_0.8710')
     parser.add_argument('--input_classes_path', type=str,
                         default=os.path.join(os.path.dirname(__file__), 'test_images/classes.txt'))
     parser.add_argument('--input_image_dir_path', type=str,
