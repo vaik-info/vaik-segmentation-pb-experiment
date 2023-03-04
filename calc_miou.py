@@ -24,9 +24,9 @@ def mean_iou(results, gt_seg_maps, num_classes, ignore_index=0):
     total_area_union = np.zeros((num_classes,), dtype=np.float32)
     total_area_pred_label = np.zeros((num_classes,), dtype=np.float32)
     total_area_label = np.zeros((num_classes,), dtype=np.float32)
-    for i in range(results.shape[0]):
+    for i in range(len(results)):
         area_intersect, area_union, area_pred_label, area_label = \
-            intersect_and_union(results[i], gt_seg_maps[i], num_classes, ignore_index=-1)
+            intersect_and_union(np.asarray(results[i]), np.asarray(gt_seg_maps[i]), num_classes, ignore_index=-1)
         total_area_intersect += area_intersect
         total_area_union += area_union
         total_area_pred_label += area_pred_label
@@ -45,7 +45,7 @@ def calc_mIoU(json_dict_list, classes, ignore_label):
     for json_dict in json_dict_list:
         pred_list.append(json_dict['labels']['array'])
         gt_list.append(json_dict['answer']['array'])
-    miou, acc, iou = mean_iou(np.vstack(pred_list), np.vstack(gt_list), len(classes), classes.index(ignore_label))
+    miou, acc, iou = mean_iou(pred_list, gt_list, len(classes), classes.index(ignore_label))
 
     print(f'mIoU:{miou:.4f}')
     for index, label in enumerate(classes):

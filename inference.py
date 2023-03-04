@@ -2,10 +2,8 @@ import argparse
 import os
 import glob
 import json
-import tqdm
 import numpy as np
 from PIL import Image
-from tqdm import tqdm
 from vaik_segmentation_pb_inference.pb_model import PbModel
 
 
@@ -22,9 +20,10 @@ def main(input_saved_model_dir_path, input_classes_path, input_image_dir_path, a
     for file in types:
         image_path_list.extend(glob.glob(os.path.join(input_image_dir_path, f'{file}'), recursive=True))
     image_list = []
-    for image_path in tqdm(image_path_list, 'read images'):
+    for image_path in image_path_list:
         image = np.asarray(Image.open(image_path).convert('RGB'))
         image_list.append(image)
+
     import time
     start = time.time()
     output, raw_pred = model.inference(image_list)
@@ -46,7 +45,7 @@ def main(input_saved_model_dir_path, input_classes_path, input_image_dir_path, a
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='inference')
     parser.add_argument('--input_saved_model_dir_path', type=str,
-                        default='~/output_model/2023-03-04-19-07-35/step-5000_batch-8_epoch-10_loss_0.0010_one_hot_mean_io_u_0.8857_val_loss_0.0016_val_one_hot_mean_io_u_0.8710')
+                        default='~/output_model/2023-03-04-22-34-07/step-5000_batch-8_epoch-26_loss_0.0015_one_hot_mean_io_u_0.8682_val_loss_0.0047_val_one_hot_mean_io_u_0.7817')
     parser.add_argument('--input_classes_path', type=str,
                         default=os.path.join(os.path.dirname(__file__), 'test_images/classes.txt'))
     parser.add_argument('--input_image_dir_path', type=str,

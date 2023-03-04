@@ -1,2 +1,2 @@
 tqdm>=4.64.1
-vaik-segmentation-pb-inference @ git+https://github.com/vaik-info/vaik-segmentation-pb-inference.git@c1a72c97790b68c8a044168d711712b175e9f5c1
+vaik-segmentation-pb-inference @ git+https://github.com/vaik-info/vaik-segmentation-pb-inference.git@74a5956e5c39bbcdca716c299ae95283d3a47ca8
