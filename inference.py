@@ -32,7 +32,7 @@ def main(input_saved_model_dir_path, input_classes_path, input_image_dir_path, a
 
     for image_path, output_elem in zip(image_path_list, output):
         answer_image = np.asarray(
-            Image.open(os.path.join(answer_image_dir_path, os.path.basename(image_path).replace('.', '_seg.'))).convert(
+            Image.open(os.path.join(answer_image_dir_path, os.path.basename(image_path).replace('raw', 'seg'))).convert(
                 'L'))
         output_json_path = os.path.join(output_dir_path, os.path.splitext(os.path.basename(image_path))[0] + '.json')
         output_elem['answer'] = {'array': answer_image.flatten().tolist(), 'shape': answer_image.shape}
